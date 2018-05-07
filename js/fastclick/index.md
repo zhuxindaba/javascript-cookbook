@@ -65,10 +65,10 @@
             layer.addEventListener('mouseup', this.onMouse, true);
         }
         layer.addEventListener('click', this.onClick, true);
-        layer.addEventListener('touchstart', this.onClick, false);
-        layer.addEventListener('touchmove', this.onClick, false);
-        layer.addEventListener('touchend', this.onClick, false);
-        layer.addEventListener('touchcancel', this.onClick, false);
+        layer.addEventListener('touchstart', this.onTouchStart, false);
+        layer.addEventListener('touchmove', this.onTouchMove, false);
+        layer.addEventListener('touchend', this.onTouchEnd, false);
+        layer.addEventListener('touchcancel', this.onTouchCancel, false);
 
         // 兼容性解决， 解决事件冒泡
         if (!Event.prototype.stopImmediatePropagation) {
@@ -160,4 +160,12 @@
     }
 )();
 
+    /**
+     * 判断鼠标事件是否允许
+     */
+    FastClick.prototype.onMouse = function (event) {
+        if (!this.targetElement) {
+            return true;
+        }
+    }
 ```
